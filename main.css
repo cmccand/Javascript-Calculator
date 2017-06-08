@@ -1,0 +1,13 @@
+.mainCalculator {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calculatorButton {
+  flex: 1 25%;
+  border: 1px solid green;
+}
+
+#entry {
+  flex: 2 66%;
+}
