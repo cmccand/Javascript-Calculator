@@ -1,13 +1,28 @@
 .mainCalculator {
   display: flex;
   flex-wrap: wrap;
+  max-width: 400px;
 }
 
 .calculatorButton {
-  flex: 1 25%;
-  border: 1px solid green;
+  flex: 1 24%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #61B34F;
+  border: 1px solid white;
+  height: 100px;
+  width: 100px;
+  padding: 0;
 }
 
 #entry {
   flex: 2 66%;
+  width: 75px;
+}
+
+#operation {
+  background-color: #82C276;
+  color: black;
 }
