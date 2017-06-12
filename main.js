@@ -14,25 +14,17 @@ function updateDisplay(event) {
   display.innerHTML = expression;
 }
 
-function clear() {
-  console.log("clear");
-  display.innerHTML = "";
-}
+// function clear() {
+//   console.log("clear");
+//   display.innerHTML = "";
+// }
 
 // loop through calcButtons
 // As long a button doesn't have an id of equals, clear, or entry
 // add a "click" eventListener and pass in update display
 
 for (var i = 0; i < calcButtons.length; i++) {
-  if (!calcButtons[i].id) {
+  if (calcButtons[i].className) {
     calcButtons[i].addEventListener("click", updateDisplay);
   }
 }
-
-function calculate() {}
-
-// for (var i = 0; i < calcButtons.length; i++) {
-//   if (calcButtons[i].className) {
-//     calcButtons[i];
-//   }
-// }
