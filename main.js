@@ -4,13 +4,19 @@ var calcButtons = document.querySelectorAll(".calculatorButton");
 console.log(calcButtons);
 var expression = "";
 console.log("expression: ", expression);
+var operation = document.querySelectorAll(".operation");
 
-function updateDisplay(e) {
+function updateDisplay(event) {
   var value = event.target.textContent;
   console.log(value);
   expression += value;
   console.log("expression: ", expression);
   display.innerHTML = expression;
+}
+
+function clear() {
+  console.log("clear");
+  display.innerHTML = "";
 }
 
 // loop through calcButtons
@@ -22,3 +28,11 @@ for (var i = 0; i < calcButtons.length; i++) {
     calcButtons[i].addEventListener("click", updateDisplay);
   }
 }
+
+function calculate() {}
+
+// for (var i = 0; i < calcButtons.length; i++) {
+//   if (calcButtons[i].className) {
+//     calcButtons[i];
+//   }
+// }
