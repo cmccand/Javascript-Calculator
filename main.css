@@ -34,6 +34,7 @@ body {
 
 .entrySpace {
   flex: 2 73.5%;
+  padding: 27px 0;
   width: 75px;
   border: 1px solid white;
   background-color: #61B34F;
