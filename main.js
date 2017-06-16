@@ -1,9 +1,6 @@
 var display = document.querySelector("#entry");
-console.log(display);
 var calcButtons = document.querySelectorAll(".calculatorButton");
-console.log(calcButtons);
 var expression = "";
-console.log("expression: ", expression);
 var operation = document.querySelectorAll(".operation");
 var state = "evaluated";
 var num1 = "";
@@ -38,10 +35,6 @@ function handleEntry(event) {
 
   display.textContent = expression;
 }
-
-// loop through calcButtons
-// As long a button doesn't have an id of equals, clear, or entry
-// add a "click" eventListener and pass in update display
 
 for (var i = 0; i < calcButtons.length; i++) {
   calcButtons[i].addEventListener("click", handleEntry);
