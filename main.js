@@ -1,45 +1,13 @@
 var display = document.querySelector("#entry");
-var calcButtons = document.querySelectorAll(".calculatorButton");
+var numberButtons = document.querySelectorAll(".numberButton");
+var operators = document.querySelectorAll(".operation");
 var expression = "";
-var operation = document.querySelectorAll(".operation");
-var state = "evaluated";
-var num1 = "";
 var operator = "";
-var num2 = "";
+var numbers = new Array;
+var startNewNumber = true;
+var isAfterEquals = false;
 
-function handleEntry(event) {
-  var value = event.target.textContent;
-  console.log("you clicked: ", value);
-  if (value == "C") {
-    expression = "";
-    state = "evaluated";
-  } else if (/[0-9]/.test(value) && state == "evaluated") {
-    num1 += value;
-    expression += value;
-  } else if (/[+X/\\-]/.test(value) && num1 != "" && state == "evaluated") {
-    state = "num2Entry";
-    operator = value;
-    expression += value;
-  } else if (state == "num2Entry") {
-    if (/[0-9]/.test(value)) {
-      num2 += value;
-      expression += value;
-    } else if (value == "=" && num2 != "") {
-      expression = evaluateExpresssion(
-        parseInt(num1),
-        parseInt(num2),
-        operator
-      );
-    }
-  }
-
-  display.textContent = expression;
-}
-
-for (var i = 0; i < calcButtons.length; i++) {
-  calcButtons[i].addEventListener("click", handleEntry);
-}
-function evaluateExpresssion(n1, n2, o) {
+function evaluateExpression(n1, n2, o) {
   if (o == "+") {
     return n1 + n2;
   } else if (o == "-") {
@@ -50,3 +18,67 @@ function evaluateExpresssion(n1, n2, o) {
     return n1 * n2;
   }
 }
+
+function numberClick(event) {
+  const value = event.target.textContent;
+  if (startNewNumber) {
+    expression = '';
+    startNewNumber = false;
+  }
+  expression += value;
+  display.textContent = expression;
+}
+
+function operatorClick(event) {
+  const value = event.target.textContent;
+  if (isAfterEquals) {
+    isAfterEquals = false;
+    startNewNumber = true;
+    operator = value;
+    return;
+  }
+  if (numbers.length > 0) {
+    const currentResult = evaluateExpression(
+      parseFloat(numbers[0]),
+      parseFloat(display.textContent),
+      operator
+    );
+    numbers[0] = currentResult;
+    display.textContent = numbers[0];
+  } else {
+    numbers.push(display.textContent);
+  }
+  operator = value;
+  startNewNumber = true;
+}
+
+function clear() {
+  expression = '';
+  display.textContent = expression;
+  startNewNumber = true;
+  isAfterEquals = false;
+  numbers = [];
+}
+
+function equals() {
+  const currentResult = evaluateExpression(
+    parseFloat(numbers[0]),
+    parseFloat(display.textContent),
+    operator
+  );
+  numbers[0] = currentResult;
+  display.textContent = numbers[0];
+  startNewNumber = true;
+  isAfterEquals = true;
+}
+
+for (var i = 0; i < numberButtons.length; i++) {
+  numberButtons[i].addEventListener("click", numberClick);
+}
+
+for (var i = 0; i < operators.length; i++) {
+  operators[i].addEventListener("click", operatorClick);
+}
+
+document.getElementById("clear").onclick = clear;
+document.getElementById("equals").onclick = equals;
